@@ -1,0 +1,26 @@
+.card {
+    border-radius: 0.5rem;
+    width: 16rem; 
+    flex-shrink: 0;
+    height: 440px;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    img {
+        height: 16rem;
+    }
+    .title {
+        text-overflow: ellipsis;
+        font-weight: 700;
+    }
+    &:hover {
+        scale: 105%;
+    }
+}
+.genre {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: .5em;
+    padding-right: .5em;
+    font-weight: 100;
+    color: grey;
+}
