@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Auth, authState, GoogleAuthProvider, onAuthStateChanged, signInWithPhoneNumber, signInWithPopup, user } from '@angular/fire/auth';
+import { Auth, authState, GoogleAuthProvider, onAuthStateChanged, signInWithPhoneNumber, signInWithPopup, signOut as signOutFirebase, user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -22,23 +22,15 @@ import { Auth, authState, GoogleAuthProvider, onAuthStateChanged, signInWithPhon
             >
           </a>
         </div>
-        <a
-          href="/advancedsearch"
-          className="flex items-center text-gray-200 hover:text-white mx-auto"
-        >
-          <!-- <FaSearch className="mr-2" /> -->
-          Advanced Search
-        </a>
         <div className="flex items-center space-x-4">
-          
           @if (currentUser | async; as user) {
-          <a href="/myprofile" class="text-yellow-500 hover:text-yellow-400">
+          <!-- <a href="/myprofile" class="text-yellow-500 hover:text-yellow-400">
             My Profile
-          </a>
+          </a> -->
           <span className="text-gray-200 mr-4"
             >Hello, {{ user.displayName }}</span
           >
-          <a class="text-gray-200 hover:text-white">Sign Out</a>
+          <a class="text-gray-200 hover:text-white" (click)="signOut()">Sign Out</a>
           } @else {
           <a
             (click)="handleSignIn()"
@@ -60,5 +52,8 @@ export class NavbarComponent {
   handleSignIn() {
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(this.auth, googleProvider).then(console.log);
+  }
+  signOut() {
+    signOutFirebase(this.auth);
   }
 }

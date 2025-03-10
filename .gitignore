@@ -47,3 +47,4 @@ dataconnect-debug.log
 .firebaserc
 .firebase
 dataconnect/.dataconnect
+**/firebase-js-config.json
