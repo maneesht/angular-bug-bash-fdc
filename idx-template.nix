@@ -26,7 +26,6 @@
     cp ${./README.md} "$out"/README.md
     cp ${./.gitignore} "$out"/.gitignore
     chmod -R u+w "$out" 
-    mv "$out"/app/src/lib/firebase.idx.tsx "$out"/app/src/lib/firebase.tsx  
-    mv "$out"/app/vite.config.idx.ts "$out"/app/vite.config.ts 
+    mv "$out"/src/proxy.conf.idx.json "$out"/src/proxy.conf.json
   '';
 }
