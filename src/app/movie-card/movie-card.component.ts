@@ -32,13 +32,24 @@ import { MovieService } from '../movie-service.service';
           }}</mat-card-title>
         </mat-card-header>
         <span class="genre">{{ movie.genre }}</span>
-        <div class="flex padding">
+        <div class="flex padding justify-between">
           <div>
-            @if (isFavorited$) {
-              <mat-icon aria-hidden="false" aria-label="Favorited" fontIcon="favorite" (click)="toggleIsFavorited()"></mat-icon>
-            } @else {
-              <mat-icon aria-hidden="false" aria-label="Favorited" fontIcon="favorite_outline" (click)="toggleIsFavorited()"></mat-icon>
-            }
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Favorited"
+              [fontIcon]="isFavorited$ ? 'favorite' : 'favorite_outline'"
+              (click)="toggleIsFavorited()"
+              class="text-red-500"
+            ></mat-icon>
+          </div>
+          <div class="flex items-center">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="rating"
+              fontIcon="star"
+              class="text-yellow-500"
+            ></mat-icon>
+          <span>{{movie.rating}}</span>
           </div>
         </div>
         <mat-card-actions>
@@ -60,12 +71,14 @@ export class MovieCardComponent {
   isFavorited$ = false;
   movieService = inject(MovieService);
   ngOnInit() {
-    this.movieService.handleGetIfFavoritedMovie(this.movie.id).subscribe((isFavorited) => {
-      this.isFavorited$ = isFavorited;
-    });
+    this.movieService
+      .handleGetIfFavoritedMovie(this.movie.id)
+      .subscribe((isFavorited) => {
+        this.isFavorited$ = isFavorited;
+      });
   }
   async toggleIsFavorited() {
-    if(this.isFavorited$) {
+    if (this.isFavorited$) {
       await this.movieService.handleDeleteFavoritedMovie(this.movie.id);
     } else {
       await this.movieService.handleDeleteFavoritedMovie(this.movie.id);

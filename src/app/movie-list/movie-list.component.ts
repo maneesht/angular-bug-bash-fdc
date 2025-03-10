@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { MovieService } from '../movie-service.service';
 import { AsyncPipe } from '@angular/common';
 import { MovieCardComponent } from "../movie-card/movie-card.component";
-import { addFavoritedMovie } from '@movie/dataconnect';
 
 @Component({
   selector: 'app-movie-list',
