@@ -21,11 +21,12 @@
     cp ${.idx/dev.nix} "$out"/.idx/dev.nix
     cp -a ${./src}/* "$out"/src/
     cp -a ${./public} "$out"/public
-    cp -a ./* "$out"/
+    cp ./* "$out"/
     cp -a ${./dataconnect}/* "$out"/dataconnect/
 
     cp ${./firebase.json} "$out"/firebase.json
     cp ${./README.md} "$out"/README.md
+    cp ${./tsconfig.json} "$out"/tsconfig.json
     cp ${./.gitignore} "$out"/.gitignore
     chmod -R u+w "$out" 
     mv "$out"/src/proxy.conf.idx.json "$out"/src/proxy.conf.json
