@@ -9,33 +9,31 @@ import { upsertUser } from '@movie/dataconnect';
   template: `
     <nav class="bg-black">
       <div class="container mx-auto flex justify-between items-center">
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center">
           <a href="/" class="flex items-center">
             <img
               src="firebase_logo.svg"
               alt="Firebase Logo"
               width="30"
               height="30"
-              className="mr-2"
             />
-            <span class=" text-white text-lg font-bold hidden md:block"
+            <span class="text-lg"
               >FriendlyMovies</span
             >
           </a>
         </div>
-        <div className="flex items-center space-x-4">
+        <div class="flex items-center">
           @if (currentUser | async; as user) {
           <!-- <a href="/myprofile" class="text-yellow-500 hover:text-yellow-400">
             My Profile
           </a> -->
-          <span className="text-gray-200 mr-4"
+          <span
             >Hello, {{ user.displayName }}</span
           >
-          <a class="text-gray-200 hover:text-white" (click)="signOut()">Sign Out</a>
+          <a (click)="signOut()">Sign Out</a>
           } @else {
           <a
             (click)="handleSignIn()"
-            class="text-gray-200 hover:text-white"
           >
             Sign In with Google
           </a>
