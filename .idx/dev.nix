@@ -29,7 +29,7 @@
             psql --dbname=postgres -c "CREATE DATABASE dataconnect;"
             psql --dbname=dataconnect -c "CREATE EXTENSION vector;"
           '';
-          npm-install = "cd app && npm i";
+          npm-install = "npm i";
         };
       };
       previews = {
