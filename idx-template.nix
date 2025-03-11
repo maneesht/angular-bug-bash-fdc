@@ -30,6 +30,7 @@
     cp ${./angular.json} "$out"/angular.json
     cp ${./tsconfig.json} "$out"/tsconfig.json
     cp ${./.gitignore} "$out"/.gitignore
+    cp ${./tsconfig.app.json} "$out"/tsconfig.app.json
     chmod -R u+w "$out" 
     mv "$out"/src/proxy.conf.idx.json "$out"/src/proxy.conf.json
   '';
