@@ -25,6 +25,8 @@
     "@angular/router": "^19.2.0",
     "@angular/ssr": "^19.2.1",
     "@movie/dataconnect": "file:src/lib/dataconnect-sdk",
+    "@tanstack-query-firebase/angular": "^0.0.1-alpha.5",
+    "@tanstack/angular-query-experimental": "^5.66.4",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

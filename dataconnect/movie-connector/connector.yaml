@@ -5,3 +5,4 @@ generate:
     package: "@movie/dataconnect"
     outputDir: ../../src/lib/dataconnect-sdk
     packageJsonDir: "../../"
+    angular: true

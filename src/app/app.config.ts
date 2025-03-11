@@ -8,13 +8,16 @@ import * as firebaseConfig from '../../firebase-js-config.json';
 import { connectDataConnectEmulator, getDataConnect, provideDataConnect } from '@angular/fire/data-connect';
 import { connectorConfig } from '@movie/dataconnect';
 import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
+import { provideTanStackQuery, QueryClient } from '@tanstack/angular-query-experimental';
 
+const queryClient = new QueryClient();
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideTanStackQuery(queryClient),
     provideAuth(() => {
       const auth = getAuth();
       connectAuthEmulator(auth, 'http://localhost:9099');
