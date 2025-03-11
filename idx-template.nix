@@ -12,6 +12,8 @@
   packages = [];
   bootstrap = ''
     mkdir "$out" 
+    mkdir "$out"/src
+    mkdir "$out"/public
     mkdir "$out"/.idx
     mkdir "$out"/dataconnect
     mkdir "$out"/.vscode
@@ -24,6 +26,6 @@
     cp ${./README.md} "$out"/README.md
     cp ${./.gitignore} "$out"/.gitignore
     chmod -R u+w "$out" 
-    # mv "$out"/src/proxy.conf.idx.json "$out"/src/proxy.conf.json
+    mv "$out"/src/proxy.conf.idx.json "$out"/src/proxy.conf.json
   '';
 }
