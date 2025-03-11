@@ -26,6 +26,8 @@
 
     cp ${./firebase.json} "$out"/firebase.json
     cp ${./README.md} "$out"/README.md
+    cp ${./package.json} "$out"/package.json
+    cp ${./angular.json} "$out"/angular.json
     cp ${./tsconfig.json} "$out"/tsconfig.json
     cp ${./.gitignore} "$out"/.gitignore
     chmod -R u+w "$out" 
