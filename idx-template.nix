@@ -20,7 +20,6 @@
     cp -a ./* "$out"/
     cp -a ${./dataconnect}/* "$out"/dataconnect/
 
-    cp ${./.vscode/settings.json} "$out"/.vscode/settings.json
     cp ${./firebase.json} "$out"/firebase.json
     cp ${./README.md} "$out"/README.md
     cp ${./.gitignore} "$out"/.gitignore
