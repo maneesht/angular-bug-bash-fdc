@@ -20,7 +20,7 @@
 
     cp ${.idx/dev.nix} "$out"/.idx/dev.nix
     cp -a ${./src}/* "$out"/src/
-    cp -a ${./public} "$out"/public
+    cp -a ${./public} "$out"/public/
     cp ./* "$out"/
     cp -a ${./dataconnect}/* "$out"/dataconnect/
 

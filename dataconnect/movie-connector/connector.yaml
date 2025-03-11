@@ -6,4 +6,3 @@ generate:
     outputDir: ../../src/lib/dataconnect-sdk
     packageJsonDir: "../../"
     react: true
-    angular: true

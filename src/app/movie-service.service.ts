@@ -30,7 +30,7 @@ export class MovieService {
   // Fetch latest movies
   handleGetLatestMovies = (
     limit: number
-  ): Observable<ListMoviesData['movies'] | null> => {
+  ): Observable<ListMoviesData['movies']> => {
     return from(
       listMovies(this.dc, {
         orderByReleaseYear: OrderDirection.DESC,

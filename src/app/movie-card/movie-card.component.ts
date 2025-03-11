@@ -7,10 +7,11 @@ import {
 } from '@angular/material/card';
 import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
-import { addFavoritedMovie, ListMoviesData } from '@movie/dataconnect';
+import { ListMoviesData } from '@movie/dataconnect';
 import { MovieService } from '../movie-service.service';
 import { Auth, authState } from '@angular/fire/auth';
-import { firstValueFrom, never, switchMap } from 'rxjs';
+import { firstValueFrom, NEVER, never, switchMap } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-movie-card',
@@ -51,7 +52,7 @@ import { firstValueFrom, never, switchMap } from 'rxjs';
               fontIcon="star"
               class="text-yellow-500"
             ></mat-icon>
-          <span>{{movie.rating}}</span>
+            <span>{{ movie.rating }}</span>
           </div>
         </div>
         <mat-card-actions>
@@ -74,17 +75,25 @@ export class MovieCardComponent {
   movieService = inject(MovieService);
   auth = inject(Auth);
   currentUser = authState(this.auth);
+  currentUserSignal = toSignal(this.currentUser);
   ngOnInit() {
-    this.currentUser.pipe(switchMap(value => !!value ? this.movieService
-      .handleGetIfFavoritedMovie(this.movie.id) : never())).subscribe((isFavorited) => {
+    // TODO: We can replace this whole block with injectGetIfFavoritedMovie({ movieId: this.movie.id }, () => ({ enabled: this.currentUserSignal()!! }));
+    this.currentUser
+      .pipe(
+        switchMap((value) =>
+          !!value
+            ? this.movieService.handleGetIfFavoritedMovie(this.movie.id)
+            : NEVER
+        )
+      )
+      .subscribe((isFavorited) => {
         this.isFavorited$ = isFavorited;
       });
-    
   }
   async toggleIsFavorited() {
-  const isFavorited = await firstValueFrom(
-  this.movieService
-      .handleGetIfFavoritedMovie(this.movie.id));
+    const isFavorited = await firstValueFrom(
+      this.movieService.handleGetIfFavoritedMovie(this.movie.id)
+    );
     if (isFavorited) {
       await this.movieService.handleDeleteFavoritedMovie(this.movie.id);
     } else {
