@@ -10,7 +10,7 @@ import { MatIcon } from '@angular/material/icon';
 import { ListMoviesData } from '@movie/dataconnect';
 import { MovieService } from '../movie-service.service';
 import { Auth, authState } from '@angular/fire/auth';
-import { firstValueFrom, NEVER, never, switchMap } from 'rxjs';
+import { firstValueFrom, NEVER, switchMap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
