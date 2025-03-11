@@ -7,8 +7,10 @@ import {
 } from '@angular/material/card';
 import { MatChip, MatChipSet } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
-import { ListMoviesData } from '@movie/dataconnect';
+import { addFavoritedMovie, ListMoviesData } from '@movie/dataconnect';
 import { MovieService } from '../movie-service.service';
+import { Auth, authState } from '@angular/fire/auth';
+import { firstValueFrom, never, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-movie-card',
@@ -70,18 +72,23 @@ export class MovieCardComponent {
   @Input({ required: true }) movie!: ListMoviesData['movies'][0];
   isFavorited$ = false;
   movieService = inject(MovieService);
+  auth = inject(Auth);
+  currentUser = authState(this.auth);
   ngOnInit() {
-    this.movieService
-      .handleGetIfFavoritedMovie(this.movie.id)
-      .subscribe((isFavorited) => {
+    this.currentUser.pipe(switchMap(value => !!value ? this.movieService
+      .handleGetIfFavoritedMovie(this.movie.id) : never())).subscribe((isFavorited) => {
         this.isFavorited$ = isFavorited;
       });
+    
   }
   async toggleIsFavorited() {
-    if (this.isFavorited$) {
+  const isFavorited = await firstValueFrom(
+  this.movieService
+      .handleGetIfFavoritedMovie(this.movie.id));
+    if (isFavorited) {
       await this.movieService.handleDeleteFavoritedMovie(this.movie.id);
     } else {
-      await this.movieService.handleDeleteFavoritedMovie(this.movie.id);
+      await this.movieService.handleAddFavoritedMovie(this.movie.id);
     }
     this.isFavorited$ = !this.isFavorited$;
   }

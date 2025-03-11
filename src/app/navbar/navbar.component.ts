@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Auth, authState, GoogleAuthProvider, onAuthStateChanged, signInWithPhoneNumber, signInWithPopup, signOut as signOutFirebase, user } from '@angular/fire/auth';
+import { Auth, authState, GoogleAuthProvider, onAuthStateChanged, signInAnonymously, signInWithCredential, signInWithPhoneNumber, signInWithPopup, signOut as signOutFirebase, user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -51,7 +51,7 @@ export class NavbarComponent {
   
   handleSignIn() {
     const googleProvider = new GoogleAuthProvider();
-    signInWithPopup(this.auth, googleProvider).then(console.log);
+    signInWithPopup(this.auth, googleProvider);
   }
   signOut() {
     signOutFirebase(this.auth);

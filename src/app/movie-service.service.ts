@@ -39,13 +39,13 @@ export class MovieService {
     );
   };
   handleGetIfFavoritedMovie = (movieId: string): Observable<boolean> => {
-    return from(getIfFavoritedMovie({ movieId })).pipe(
+    return from(getIfFavoritedMovie(this.dc, { movieId })).pipe(
       map((res) => !!res.data.favorite_movie)
     );
   };
   handleAddFavoritedMovie = async (movieId: string): Promise<void> => {
     try {
-      await addFavoritedMovie({ movieId });
+      await addFavoritedMovie(this.dc, { movieId });
     } catch (error) {
       console.error('Error adding movie to favorites:', error);
       throw error;
@@ -55,7 +55,7 @@ export class MovieService {
   // Remove a movie from user's favorites
   handleDeleteFavoritedMovie = async (movieId: string): Promise<void> => {
     try {
-      await deleteFavoritedMovie({ movieId });
+      await deleteFavoritedMovie(this.dc, { movieId });
     } catch (error) {
       console.error('Error removing movie from favorites:', error);
       throw error;

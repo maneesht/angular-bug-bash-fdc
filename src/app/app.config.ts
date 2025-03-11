@@ -17,12 +17,12 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => {
       const auth = getAuth();
-      connectAuthEmulator(auth, 'http://localhost:9100');
+      connectAuthEmulator(auth, 'http://localhost:9099');
       return auth;
     }),
     provideDataConnect(() => {
       const dc = getDataConnect(connectorConfig);
-      connectDataConnectEmulator(dc, 'localhost', 9400);
+      connectDataConnectEmulator(dc, 'localhost', 9399);
       return dc;
     })
   ],

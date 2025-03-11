@@ -1,0 +1,6 @@
+{
+    "/v1beta/projects": {
+        "target": "http://127.0.0.1:9399",
+        "changeOrigin": true
+  }
+}
