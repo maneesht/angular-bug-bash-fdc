@@ -1,6 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Auth, authState, GoogleAuthProvider, onAuthStateChanged, signInAnonymously, signInWithCredential, signInWithPhoneNumber, signInWithPopup, signOut as signOutFirebase, user } from '@angular/fire/auth';
+import { upsertUser } from '@movie/dataconnect';
 
 @Component({
   selector: 'app-navbar',
@@ -49,9 +50,10 @@ export class NavbarComponent {
   auth = inject(Auth);
   currentUser = authState(this.auth)
   
-  handleSignIn() {
+  async handleSignIn() {
     const googleProvider = new GoogleAuthProvider();
-    signInWithPopup(this.auth, googleProvider);
+    const res = await signInWithPopup(this.auth, googleProvider);
+    await upsertUser({ username: res.user.email! });
   }
   signOut() {
     signOutFirebase(this.auth);
